@@ -1,7 +1,6 @@
 <?php
-App::import('Controller', 'Controller', false);
-//App::uses('Referer', 'Utils.Controller/Component/Referer');
-App::import('Component', 'Utils.Referer');
+App::uses('Controller', 'Controller');
+App::uses('RefererComponent', 'Utils.Controller/Component');
 App::uses('Router', 'Routing');
 
 class Article extends CakeTestModel {
@@ -41,7 +40,7 @@ class ArticlesTestController extends Controller {
 }
 
 
-class PrgComponentTest extends CakeTestCase {
+class RefererComponentTest extends CakeTestCase {
 /**
  * Fixtures
  *
