@@ -1,4 +1,5 @@
 <?php
+App::uses('LookupableBehavior', 'Utils.Model/Behavior');
 
 /**
  * Post Test Model
@@ -30,7 +31,7 @@ class LookupableTest extends CakeTestCase {
  * @return void
  * @access public
  */
-	public function setUp() {
+	public function startTest() {
 		$this->Post = new Post();
 	}
 
@@ -40,7 +41,7 @@ class LookupableTest extends CakeTestCase {
  * @return void
  * @access public
  */
-	public function tearDown() {
+	public function endTest() {
 		unset($this->Post);
 		ClassRegistry::flush();
 	}
@@ -52,7 +53,7 @@ class LookupableTest extends CakeTestCase {
  * @access public
  */
 	public function testAddRecordAndLookup() {
-		$this->Post->Behaviors->load('Utils.Lookupable', array(
+		$this->Post->Behaviors->attach('Utils.Lookupable', array(
 			'types' => array(
 				'Article')));
 		$this->Post->create();
