@@ -62,7 +62,7 @@ class ListTest extends CakeTestCase {
  */
 	public function setUp() {
 		$this->UsersAddon = ClassRegistry::init('UsersAddon');
-		$this->UsersAddon->Behaviors->load('Utils.List', array(
+		$this->UsersAddon->Behaviors->attach('Utils.List', array(
 			'positionColumn' => 'position',
 			'scope' => 'user_id'));
 	}
