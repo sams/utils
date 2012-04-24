@@ -17,22 +17,22 @@
  * @package utils
  * @subpackage utils.controllers.components
  */
-class UtilsComponent extends Object {
+class UtilsComponent extends Component {
 
 /**
  * Controller
  *
  * @var mixed $controller
  */ 
-	public $controller; 
+	public $Controller; 
 
 /**
  * Startup Callback
  *
  * @param object Controller object
  */
-	public function startup(&$controller) {
-		$this->controller = &$controller;
+	public function startup(Controller $controller) {
+		$this->Controller =& $controller;
 	}
 
 /**
@@ -43,8 +43,9 @@ class UtilsComponent extends Object {
  * @return string
  */
 	public function cleanHtml($text, $settings = 'full') {
-		App::import('Helper', 'Utils.Cleaner');
-		$cleaner = & new CleanerHelper();
+		App::uses('CleanerHelper', 'Utils.View/Helper');
+		App::uses('View', 'View');
+		$cleaner = & new CleanerHelper(new View);
 		return $cleaner->clean($text, $settings);
 	}
 
