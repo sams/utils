@@ -1,5 +1,5 @@
 <?php
-App::import('Behavior', 'Utils.Toggleable');
+App::uses('ToggleableBehavior', 'Utils.Model/Behavior');
 
 /**
  * Post Test Model
@@ -27,7 +27,7 @@ class ToggleableTest extends CakeTestCase {
  *
  * @return void
  */
-	public function setUp() {
+	public function startTest() {
 		$this->Post = new Post();
 	}
 
@@ -36,7 +36,7 @@ class ToggleableTest extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	public function endTest() {
 		unset($this->Post);
 		unset($this->Behavior);
 		ClassRegistry::flush();
@@ -49,7 +49,7 @@ class ToggleableTest extends CakeTestCase {
  * @return void
  */
 	public function testToggle() {
-		$this->Post->Behaviors->load('Utils.Toggleable', array(
+		$this->Post->Behaviors->attach('Utils.Toggleable', array(
 			'fields' => array(
 				'deleted' => array(1, 0))));
 
@@ -66,7 +66,7 @@ class ToggleableTest extends CakeTestCase {
  * @return void
  */
 	public function testInvalidFieldException() {
-		$this->Post->Behaviors->load('Utils.Toggleable', array(
+		$this->Post->Behaviors->attach('Utils.Toggleable', array(
 			'fields' => array(
 				'other_field' => array(1, 0))));
 
@@ -81,7 +81,7 @@ class ToggleableTest extends CakeTestCase {
  * @return void
  */
 	public function testInvalidFieldStates() {
-		$this->Post->Behaviors->load('Utils.Toggleable', array(
+		$this->Post->Behaviors->attach('Utils.Toggleable', array(
 			'fields' => array(
 				'deleted' => array(1))));
 
@@ -96,11 +96,11 @@ class ToggleableTest extends CakeTestCase {
  * @return void
  */
 	public function testToggleInvalidRecord() {
-		$this->Post->Behaviors->load('Utils.Toggleable', array(
+		$this->Post->Behaviors->attach('Utils.Toggleable', array(
 			'fields' => array(
 				'deleted' => array(1))));
 
-		$this->expectException('Exception');
+		$this->expectException('InvalidArgumentException');
 		$this->Post->toggle('invalid-record-id', 'deleted');
 	}
 
