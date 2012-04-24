@@ -17,7 +17,7 @@
  * @package utils
  * @subpackage utils.controllers.components
  */
-App::import('Core', 'HttpSocket');
+App::uses('HttpSocket', 'Network/Http');
 App::import('Lib', 'Xmlrpc.Xmlrpc');
 
 class PingbacksComponent extends Object {
@@ -33,23 +33,23 @@ class PingbacksComponent extends Object {
  *
  * @var Socket $Socket
  */
-	private $Socket;
+	protected $Socket;
 
 /**
  * Controller
  *
- * @var mixed $controller
+ * @var mixed $Controller
  */
-	public $controller = null;
+	public $Controller = null;
 
 /**
  * Callback
  *
  * @param object Controller object
  */
-	public function initialize(&$controller) {
+	public function startup(Controller $controller) {
+		$this->Controller =& $controller;
 		$this->Socket = new HttpSocket();
-		$this->controller = $controller;
 	}
 
 /**
